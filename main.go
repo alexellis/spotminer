@@ -147,6 +147,15 @@ func main() {
 			}
 
 			hostname := fmt.Sprintf("spot%s%s", match.Installation, strings.Replace(match.Plan, "_", "", -1))
+
+			// userData aka cloud-init is used to 1) install Docker, setup the miner and
+			// configure the stratum server / bitcoin wallet address
+			userData := `#!/bin/bash
+curl -sL get.docker.com | sh
+docker swarm init --advertise-addr=$(hostname -i)
+docker service rm wolf ; docker service create --mode=global --name wolf alexellis2/cpu-opt:` + imageTag + ` ./cpuminer -a ` + config.Preferences.Algorithm + ` -o ` + getStratumServer(match.Installation, config.Preferences.Algorithm, config.Preferences.Port) + ` -u ` + config.Preferences.BitcoinWallet + `.` + hostname + `
+docker service logs wolf -f`
+
 			createReq := &packngo.DeviceCreateRequest{
 				Plan:         match.Plan,
 				Facility:     match.Installation,
@@ -156,11 +165,7 @@ func main() {
 				SpotPriceMax: match.Price,
 				OS:           "ubuntu_16_04",
 				BillingCycle: "hourly",
-				UserData: `#!/bin/bash
-curl -sL get.docker.com | sh
-docker swarm init --advertise-addr=$(hostname -i)
-docker service rm wolf ; docker service create --mode=global --name wolf alexellis2/cpu-opt:` + imageTag + ` ./cpuminer -a ` + config.Preferences.Algorithm + ` -o ` + getStratumServer(match.Installation, config.Preferences.Algorithm, config.Preferences.Port) + ` -u ` + config.Preferences.BitcoinWallet + `.` + hostname + `
-docker service logs wolf -f`,
+				UserData:     userData,
 			}
 
 			fmt.Printf("Creating: %s\n", hostname)
@@ -169,6 +174,7 @@ docker service logs wolf -f`,
 				fmt.Fprintf(os.Stderr, "%s", err)
 				os.Exit(-1)
 			}
+
 			fmt.Println(resp.StatusCode)
 			fmt.Println(device)
 
@@ -186,7 +192,6 @@ func getMatches(priceMap packngo.PriceMap, desiredPlans []string) []SpotMatch {
 	matches := []SpotMatch{}
 
 	for k, v := range priceMap {
-		// fmt.Println(k)
 
 		for planName, planPrice := range v {
 			for _, desiredPlan := range desiredPlans {
@@ -210,6 +215,7 @@ type SpotMatch struct {
 	Price        float64
 }
 
+// BySpotMatch sorts by plan weighting (i.e. our preference for one machine other another)
 type BySpotMatch []SpotMatch
 
 func (a BySpotMatch) Len() int      { return len(a) }
