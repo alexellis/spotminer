@@ -51,7 +51,6 @@ func main() {
 		os.Exit(2)
 	}
 
-	fmt.Println(config)
 	if len(config.Packet.ProjectID) == 0 {
 		fmt.Fprintf(os.Stderr, "Provide a value for ProjectID\n")
 		os.Exit(1)
