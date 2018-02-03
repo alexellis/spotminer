@@ -16,7 +16,31 @@ Features:
 * Configure the algorithm and port i.e. hodl or cryptonight
 * Atom hosts are supported through a separate Docker image
 
-The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your packet API key and project ID. Set the `CONFIG_FILE` enviromental variable for a different filename or path.
+The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your packet API key and project ID. Set the `CONFIG_FILE` enviromental variable for a different filename or path. You must also configure the bitcoin wallet address for your mining here.
+
+```yaml
+packet:
+  project_id: ""
+  api_key: ""
+preferences:
+  max_spot_instances: 6
+  max_price: 0.15
+  mine_algo: "cryptonight"
+  port: 3355
+  bitcoin_wallet: wallet_address
+```
+
+## Installation
+
+* Install Go 1.9
+
+* Run go install
+
+```
+go install github.com/alexellis/spotminer
+```
+
+This installs spotminer into your `$GOPATH/bin` directory, so update your `$PATH` variable if necessary. `$GOPATH` is normally set to `$HOME/go`.
 
 ## Q&A
 
