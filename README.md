@@ -18,7 +18,11 @@ Features:
 
 The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your packet API key and project ID. Set the `CONFIG_FILE` enviromental variable for a different filename or path.
 
-Packages:
+## Q&A
+
+For any questions please consult my [mine-with-docker project](https://github.com/alexellis/mine-with-docker)
+
+## Packages:
 
 Dependencies are managed through the `dep` tool.
 
