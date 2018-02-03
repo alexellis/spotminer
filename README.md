@@ -3,7 +3,9 @@ spotminer
 
 ## What is this?
 
-`spotminer` automates the Packet.net spot market and a cryptocurrency miner so that you can lower the costs of mining in the cloud and access bare metal performance.
+`spotminer` automates the [Packet.net](https://www.packet.net) spot market and a cryptocurrency miner so that you can lower the costs of mining in the cloud and access bare metal performance.
+
+> Note: See disclaimer
 
 Features:
 
@@ -16,7 +18,7 @@ Features:
 * Configure the algorithm and port i.e. hodl or cryptonight
 * Atom hosts are supported through a separate Docker image
 
-The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your packet API key and project ID. Set the `CONFIG_FILE` enviromental variable for a different filename or path. You must also configure the bitcoin wallet address for your mining here.
+The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your [Packet API key and project ID](https://www.packet.net/developers/api/). Set the `CONFIG_FILE` enviromental variable for a different filename or path. You must also configure the bitcoin wallet address for your mining here.
 
 ```yaml
 packet:
