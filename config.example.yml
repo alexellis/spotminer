@@ -1,0 +1,8 @@
+packet:
+  project_id: ""
+  api_key: ""
+preferences:
+  max_spot_instances: 6
+  max_price: 0.15
+  mine_algo: "cryptonight"
+  port: 3355
