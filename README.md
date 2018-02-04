@@ -3,20 +3,23 @@ spotminer
 
 ## What is this?
 
-`spotminer` automates the [Packet.net](https://www.packet.net) spot market and a cryptocurrency miner so that you can lower the costs of mining in the cloud and access bare metal performance.
+`spotminer` automates the [Packet.net](https://www.packet.net) [spot market](https://help.packet.net/technical/deployment-options/spot-market) and a cryptocurrency miner so that you can lower the costs of mining in the cloud and access bare metal performance.
 
-> Note: See disclaimer
+> Packet's [Spot Market](https://help.packet.net/technical/deployment-options/spot-market) allows users to bid on spare server capacity at reduced rates. 
 
 Features:
 
 * Set a budget (max price) for each host
 * Automatically sets the closest stratum server
 * Places the minimum bid for the host
+* Uses my [mine-with-docker project](https://github.com/alexellis/mine-with-docker) and `cpuminer`
 * Can be run on a timer - i.e. every 5 minutes to ensure reclaimed hosts are replaced
 * Easy configuration in YAML
 * Docker Swarm used as an init process to keep the miner running if it crashes
-* Configure the algorithm and port i.e. hodl or cryptonight
+* Configure one of the supported algorithms and Stratum of port i.e. hodl or cryptonight
 * Atom hosts are supported through a separate Docker image
+
+> Note: See disclaimer and check T&Cs with any cloud provider before embarking on mining.
 
 ## Q&A
 
@@ -50,6 +53,8 @@ preferences:
   port: 3355
   bitcoin_wallet: wallet_address
 ```
+
+For mining Hodl use `mine_algo: hodl` and `port: 3352`
 
 ## Packages:
 
