@@ -40,7 +40,7 @@ go install github.com/alexellis/spotminer
 This installs spotminer into your `$GOPATH/bin` directory, so update your `$PATH` variable if necessary. `$GOPATH` is normally set to `$HOME/go`.
 
 
-The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your [Packet API key and project ID](https://www.packet.net/developers/api/). Set the `CONFIG_FILE` enviromental variable for a different filename or path. You must also configure the bitcoin wallet address for your mining here.
+The config file is read from `config.yml`, so copy `config.example.yml` as a template and fill in your [Packet API key and project ID](https://www.packet.net/developers/api/). Set the `CONFIG_FILE` environmental variable for a different filename or path. You must also configure the bitcoin wallet address for your mining here.
 
 ```yaml
 packet:
